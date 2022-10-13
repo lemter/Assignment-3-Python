@@ -2,6 +2,6 @@ Install Python 3
 Install packages:
 - requests
 - flask
-- psycopg2, pipcopg2-binary
+- psycopg2, psycopg2-binary
 - jyserver
 - json
