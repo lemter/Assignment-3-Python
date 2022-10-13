@@ -5,7 +5,8 @@ Created by Karim Zhansarin (CS-2101)
 ### Installation
 1) Download all depencides from [requirements](requirements.txt).
 2) Download and depackage project.
-3) Run `python3 src/main.py`
+3) Create database `nft_db` in your PostgreSQL and restore `nft_db.sql`.
+4) Run `python3 src/main.py`
 
 ### Usage
 1) Go to web-page of runned program. Here you can see text field, where you need to write token address of NFT.
