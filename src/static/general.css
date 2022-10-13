@@ -1,0 +1,32 @@
+th {
+    padding: 4px;
+    font-size: 18px;
+    text-align: left;
+}
+
+td {
+    padding: 4px;
+    text-align: left;
+}
+
+.search_box {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.search_box input {
+    width: 467px;
+    height: 30px;
+    font-size: 20px;
+    margin-top: -10px;
+}
+
+.search_box button {
+    width: 100px;
+    height: 26px;
+    font-size: 14px;
+    margin-top: 8px;
+}

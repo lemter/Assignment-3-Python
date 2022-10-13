@@ -1,4 +1,3 @@
-from curses import meta
 from flask import Flask, render_template, redirect
 import psycopg2, requests, jyserver.Flask as jsf, json
 
@@ -29,7 +28,13 @@ def nftInfo(nft_address):
     cursor.execute(f"SELECT * FROM nft WHERE mint = '{nft_address}'")
     fetch = cursor.fetchone()
     if fetch:
-        return render_template('nft_info.html')
+        cursor.execute(f"SELECT * FROM metaplex WHERE metaplex_id={fetch[4]}")
+        metaplex = cursor.fetchone()
+        response = requests.get(metaplex[1]).text
+        metadata = json.loads(response)
+        cursor.execute(f"SELECT * FROM owners WHERE owner_id = ANY(ARRAY{metaplex[5]})")
+        owners = cursor.fetchall()
+        return render_template('nft_info.html', fetch = fetch, metaplex = metaplex, metadata = metadata, owners = owners)
     else:
         url = f"https://solana-gateway.moralis.io/nft/mainnet/{nft_address}/metadata"
         headers = {
@@ -38,6 +43,10 @@ def nftInfo(nft_address):
         }
         response = requests.get(url, headers=headers).text
         parse = json.loads(response)
+        try:
+            parse["mint"]
+        except:
+            return redirect('/')
         ids:list = []
         for i in parse["metaplex"]["owners"]:
             cursor.execute(f"""INSERT INTO owners (address, verified, share)
