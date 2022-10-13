@@ -1,3 +1,4 @@
+Install PostgreSQL
 Install Python 3
 Install packages:
 - requests
